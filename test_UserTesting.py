@@ -1,3 +1,4 @@
+from xml.dom.minidom import Element
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -52,7 +53,7 @@ def test_NewPassword():
 
 @allure.step("openBrowser")
 def openBrowser():
-    Path = './Rhion/chromedriver'
+    Path = './chromedriver'
     driver = webdriver.Chrome(Path)
     driver.get("https://rhinoshield.tw/")
     return driver
@@ -72,9 +73,9 @@ def login(driver):
         ))
     loginElement.click()
     driver.find_element_by_xpath(
-        '//*[@id="customer_email"]').send_keys('YuWeiZhang10@gmail.com')
+        '//*[@id="customer_email"]').send_keys('awdzsxqe86@gmail.com')
     driver.find_element_by_xpath(
-        '//*[@id="customer_password"]').send_keys('MonsterRhion55688H')
+        '//*[@id="customer_password"]').send_keys('Rhion123')
     driver.find_element_by_xpath('//*[@id="customer_login"]/div').click()
     WebDriverWait(driver, 10).until(
         EC.presence_of_element_located(
@@ -114,6 +115,11 @@ def numberCantLong(driver):
     EC.visibility_of_element_located(
         (By.XPATH, '//*[@id = "customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/p'))
 
+    mistake = driver.find_element_by_xpath(
+        '//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/p')
+    if mistake == "手機號碼格式有誤，請確認輸入的內容":
+        print("OK")
+
 
 @ allure.step("電話不能非數字")
 def notNumber(driver):
@@ -123,8 +129,16 @@ def notNumber(driver):
         '//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/div[1]/input').clear()
     driver.find_element_by_xpath(
         '//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/div[1]/input').send_keys('abcdefghij')
+    mistake = driver.find_element_by_xpath(
+        '//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/p')
+    if mistake == "手機號碼格式有誤，請確認輸入的內容":
+        print("OK")
     EC.visibility_of_element_located(
         (By.XPATH, '//*[@id = "customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/p'))
+
+    # TODO應該要比對裡面的字
+    # driver.find_element_by_xpath(
+    #     '//*[@id="customer-info"]/div[8]/div/div/div[1]/div[3]/div/button[1]').click()
 
 
 @ allure.step("新密碼不得少於五字")
@@ -155,3 +169,8 @@ def newPassword(driver):
             (By.XPATH, '//*[@id="reset-password"]/div[2]/div/div[2]/div[1]')))
     driver.find_element_by_xpath(
         '// *[@id="reset-password"]/div[2]/div/div[3]/button[1]').click()
+
+    element = driver.find_element_by_xpath(
+        '//*[@id= "reset-password"]/div[2]/div/div[2]/div[1]/p')
+    if element.text == "密碼至少要 5 個字元":
+        print("OK")
