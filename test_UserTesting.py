@@ -113,7 +113,6 @@ def numberCantLong(driver):
         '//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/div[1]/input').send_keys('091234567890')
     EC.visibility_of_element_located(
         (By.XPATH, '//*[@id = "customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/p'))
-    # TODO應該要比對裡面的字
 
 
 @ allure.step("電話不能非數字")
@@ -126,9 +125,6 @@ def notNumber(driver):
         '//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/div[1]/input').send_keys('abcdefghij')
     EC.visibility_of_element_located(
         (By.XPATH, '//*[@id = "customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/p'))
-    # TODO應該要比對裡面的字
-    # driver.find_element_by_xpath(
-    #     '//*[@id="customer-info"]/div[8]/div/div/div[1]/div[3]/div/button[1]').click()
 
 
 @ allure.step("新密碼不得少於五字")
