@@ -55,7 +55,7 @@ def test_login():
 @allure.step("openBrowser")
 def openBrowser():
     chrome_options = webdriver.ChromeOptions()
-    driver = webdriver.Remote(desired_capabilities=chrome_options.to_capabilities())
+    driver = webdriver.Remote("http://hostname:4444/wd/hub", desired_capabilities=chrome_options.to_capabilities())
     # driver = webdriver.Chrome('./chromedriver')
     driver.get("https://rhinoshield.tw/")
     return driver
