@@ -59,6 +59,7 @@ def openBrowser():
     chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_argument("--headless")
     chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--window-size=1400,600')
     driver = webdriver.Remote("http://localhost:4444/wd/hub", desired_capabilities=chrome_options.to_capabilities())
     # driver = webdriver.Chrome('./chromedriver')
     driver.get("https://rhinoshield.tw/")
