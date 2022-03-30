@@ -66,9 +66,9 @@ def openBrowser():
         command_executor="http://localhost:4444/wd/hub",
         desired_capabilities=DesiredCapabilities.CHROME,
         options=chrome_options
-        shm_size: '1gb'
     )
     driver.get("https://rhinoshield.tw/")
+    shm_size: "1000"
     return driver
 
 
