@@ -55,16 +55,16 @@ def test_login():
 @allure.step("openBrowser")
 def openBrowser():
     chrome_options = webdriver.ChromeOptions()
-    # chrome_options.add_argument("headless")
-    # chrome_options.add_argument("--ignore-certificate-errors")
-    # chrome_options.add_argument("--ignore-ssl-errors")
-    # chrome_options.add_argument("disable-gpu")
+    chrome_options.add_argument("headless")
+    chrome_options.add_argument("--ignore-certificate-errors")
+    chrome_options.add_argument("--ignore-ssl-errors")
+    chrome_options.add_argument("disable-gpu")
     # chrome_options.add_argument("no-default-browser-check")
     # chrome_options.add_argument("no-first-run")
     # chrome_options.add_argument("no-sandbox")
     driver = webdriver.Remote(
         command_executor="http://localhost:4444/wd/hub",
-        # desired_capabilities=DesiredCapabilities.CHROME,
+        desired_capabilities=DesiredCapabilities.CHROME,
         options=chrome_options
     )
     driver.get("https://rhinoshield.tw/")
