@@ -58,7 +58,7 @@ def openBrowser():
     chrome_options.add_argument("headless")
     chrome_options.add_argument("--ignore-certificate-errors")
     chrome_options.add_argument("--ignore-ssl-errors")
-    chrome_options.add_argument("disable-gpu")
+    # chrome_options.add_argument("disable-gpu")
     # chrome_options.add_argument("no-default-browser-check")
     # chrome_options.add_argument("no-first-run")
     # chrome_options.add_argument("no-sandbox")
