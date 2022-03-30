@@ -68,7 +68,6 @@ def openBrowser():
         options=chrome_options
     )
     driver.get("https://rhinoshield.tw/")
-    shm_size: "1000"
     return driver
 
 
