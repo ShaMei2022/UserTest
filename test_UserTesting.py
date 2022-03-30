@@ -56,6 +56,7 @@ def test_login():
 def openBrowser():
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
     driver = webdriver.Remote("http://localhost:4444/wd/hub", desired_capabilities=chrome_options.to_capabilities())
     # driver = webdriver.Chrome('./chromedriver')
     driver.get("https://rhinoshield.tw/")
