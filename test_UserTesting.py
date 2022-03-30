@@ -57,10 +57,10 @@ def openBrowser():
     chrome_options.add_argument("headless")
     options = webdriver.ChromeOptions()
     driver = webdriver.Remote(desired_capabilities=options.to_capabilities())
-    driver = webdriver.Remote(
-        command_executor="http://localhost:4444/wd/hub",
-        options=chrome_options
-    )
+    # driver = webdriver.Remote(
+    #     command_executor="http://localhost:4444/wd/hub",
+    #     options=chrome_options
+    # )
     driver.get("https://rhinoshield.tw/")
     return driver
 
