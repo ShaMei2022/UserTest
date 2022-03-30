@@ -54,7 +54,7 @@ def test_login():
 
 @allure.step("openBrowser")
 def openBrowser():
-    chrome_options = webdriver.ChromeOptions()
+    # chrome_options = webdriver.ChromeOptions()
     # chrome_options.add_argument("headless")
     # chrome_options.add_argument("--ignore-certificate-errors")
     # chrome_options.add_argument("--ignore-ssl-errors")
