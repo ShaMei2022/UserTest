@@ -61,7 +61,7 @@ def openBrowser():
     chrome_options.add_argument("disable-gpu")
     chrome_options.add_argument("no-default-browser-check")
     chrome_options.add_argument("no-first-run")
-    # chrome_options.add_argument("no-sandbox")
+    chrome_options.add_argument("no-sandbox")
     driver = webdriver.Remote(
         command_executor="http://localhost:4444/wd/hub",
         desired_capabilities=DesiredCapabilities.CHROME,
