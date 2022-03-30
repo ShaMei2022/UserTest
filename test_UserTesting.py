@@ -1,4 +1,5 @@
 from time import sleep
+import json
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -54,14 +55,13 @@ def test_login():
 
 @allure.step("openBrowser")
 def openBrowser():
-    chrome_options = webdriver.ChromeOptions()
-    # chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--disable-dev-shm-usage')
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument('--disable-gpu')
-    chrome_options.add_argument('--window-size=1400,600')
-    driver = webdriver.Remote("http://localhost:4444/wd/hub", desired_capabilities=chrome_options.to_capabilities())
-    # driver = webdriver.Chrome('./chromedriver')
+    setting = json.load(open('setting.json'))
+    if setting["is_local"] == True:
+        driver = webdriver.Chrome('./chromedriver')
+    else:
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument("--headless")
+        driver = webdriver.Remote("http://localhost:4444/wd/hub", desired_capabilities=chrome_options.to_capabilities())
     driver.get("https://rhinoshield.tw/")
     return driver
 
@@ -86,120 +86,120 @@ def login(driver):
         by=By.XPATH, value='//*[@id="customer_password"]').send_keys('Rhion123')
     driver.find_element(
         by=By.XPATH, value='//*[@id="customer_login"]/div').click()
-    WebDriverWait(driver, 10).until(
+    WebDriverWait(driver, 120).until(
         EC.presence_of_element_located(
             (By.XPATH, '//*[@id="slider"]/li[1]/a/div[1]'))
     )
 
 
-# @allure.step("點選個人頁面")
-# def clickProfile(driver):
-#     profileElement = WebDriverWait(driver, 10).until(
-#         EC.presence_of_element_located(
-#             (By.XPATH, '//*[@id="navigation-bar"]/div[2]/div/div[2]/div/div[2]/div/div'))
-#     )
-#     profileElement.click()
+@allure.step("點選個人頁面")
+def clickProfile(driver):
+    profileElement = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located(
+            (By.XPATH, '//*[@id="navigation-bar"]/div[2]/div/div[2]/div/div[2]/div/div'))
+    )
+    profileElement.click()
 
 
-# @ allure.step("編輯個人頁面")
-# def editProfile(driver):
-#     WebDriverWait(driver, 10).until(
-#         EC.presence_of_element_located(
-#             (By.XPATH, '//*[@id="customer-info"]/h2'))
-#     )
-#     WebDriverWait(driver, 10).until(
-#         EC.presence_of_element_located(
-#             (By.XPATH, '//*[@id="customer-info"]/button'))
-#     ).click()
+@ allure.step("編輯個人頁面")
+def editProfile(driver):
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located(
+            (By.XPATH, '//*[@id="customer-info"]/h2'))
+    )
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located(
+            (By.XPATH, '//*[@id="customer-info"]/button'))
+    ).click()
 
 
-# @ allure.step("電話號碼不可過長")
-# def numberCantLong(driver):
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/div[1]/input').click()
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/div[1]/input').clear()
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/div[1]/input').send_keys('091234567890')
-#     WebDriverWait(driver, 10).until(
-#         EC.presence_of_element_located(
-#             (By.XPATH, '//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/p'))
-#     )
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/p')
+@ allure.step("電話號碼不可過長")
+def numberCantLong(driver):
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/div[1]/input').click()
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/div[1]/input').clear()
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/div[1]/input').send_keys('091234567890')
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located(
+            (By.XPATH, '//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/p'))
+    )
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/p')
 
 
-# @ allure.step("電話不能非數字")
-# def notNumber(driver):
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/div[1]/input').click()
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/div[1]/input').clear()
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/div[1]/input').send_keys('abcdefghij')
-#     WebDriverWait(driver, 10).until(
-#         EC.presence_of_element_located(
-#             (By.XPATH, '//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/p'))
-#     )
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/p')
+@ allure.step("電話不能非數字")
+def notNumber(driver):
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/div[1]/input').click()
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/div[1]/input').clear()
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/div[1]/input').send_keys('abcdefghij')
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located(
+            (By.XPATH, '//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/p'))
+    )
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="customer-info"]/div[8]/div/div/div[1]/div[2]/div[3]/div/p')
 
 
-# @ allure.step("新密碼不得少於五字")
-# def newPassword(driver):
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="reset-password"]/button').click()
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="new-password"]').click()
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="new-password"]').clear
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="new-password"]').send_keys('1')
+@ allure.step("新密碼不得少於五字")
+def newPassword(driver):
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="reset-password"]/button').click()
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="new-password"]').click()
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="new-password"]').clear
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="new-password"]').send_keys('1')
 
-#     WebDriverWait(driver, 1, 0.5).until(
-#         EC.visibility_of_element_located(
-#             (By.XPATH, '//*[@id="reset-password"]/div[2]/div/div[2]/div[1]/p')))
-#     sleep(0.3)
+    WebDriverWait(driver, 1, 0.5).until(
+        EC.visibility_of_element_located(
+            (By.XPATH, '//*[@id="reset-password"]/div[2]/div/div[2]/div[1]/p')))
+    sleep(0.3)
 
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="new-password"]').clear()
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="new-password"]').send_keys('12')
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="new-password"]').clear()
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="new-password"]').send_keys('12')
 
-#     WebDriverWait(driver, 1, 0.5).until(
-#         EC.visibility_of_element_located(
-#             (By.XPATH, '//*[@id="reset-password"]/div[2]/div/div[2]/div[1]/p')))
-#     sleep(0.3)
+    WebDriverWait(driver, 1, 0.5).until(
+        EC.visibility_of_element_located(
+            (By.XPATH, '//*[@id="reset-password"]/div[2]/div/div[2]/div[1]/p')))
+    sleep(0.3)
 
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="new-password"]').clear()
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="new-password"]').send_keys('123')
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="new-password"]').clear()
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="new-password"]').send_keys('123')
 
-#     WebDriverWait(driver, 1, 0.5).until(
-#         EC.visibility_of_element_located(
-#             (By.XPATH, '//*[@id="reset-password"]/div[2]/div/div[2]/div[1]/p')))
-#     sleep(0.3)
+    WebDriverWait(driver, 1, 0.5).until(
+        EC.visibility_of_element_located(
+            (By.XPATH, '//*[@id="reset-password"]/div[2]/div/div[2]/div[1]/p')))
+    sleep(0.3)
 
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="new-password"]').clear()
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="new-password"]').send_keys('1234')
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="new-password"]').clear()
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="new-password"]').send_keys('1234')
 
-#     WebDriverWait(driver, 1, 0.5).until(
-#         EC.visibility_of_element_located(
-#             (By.XPATH, '//*[@id="reset-password"]/div[2]/div/div[2]/div[1]/p')))
-#     sleep(0.3)
+    WebDriverWait(driver, 1, 0.5).until(
+        EC.visibility_of_element_located(
+            (By.XPATH, '//*[@id="reset-password"]/div[2]/div/div[2]/div[1]/p')))
+    sleep(0.3)
 
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="new-password"]').clear()
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="new-password"]').send_keys('0123')
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="new-password"]').clear()
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="new-password"]').send_keys('0123')
 
-#     WebDriverWait(driver, 1, 0.5).until(
-#         EC.visibility_of_element_located(
-#             (By.XPATH, '//*[@id="reset-password"]/div[2]/div/div[2]/div[1]/p')))
-#     sleep(0.3)
+    WebDriverWait(driver, 1, 0.5).until(
+        EC.visibility_of_element_located(
+            (By.XPATH, '//*[@id="reset-password"]/div[2]/div/div[2]/div[1]/p')))
+    sleep(0.3)
 
-#     driver.find_element(
-#         by=By.XPATH, value='//*[@id="reset-password"]/div[2]/div/div[2]/div[1]/p')
+    driver.find_element(
+        by=By.XPATH, value='//*[@id="reset-password"]/div[2]/div/div[2]/div[1]/p')
