@@ -14,13 +14,13 @@ def test_login():
     closeBrowser(driver)
 
 
-@allure.story("個人資訊可以修改")
-def test_EditProfile():
-    driver = openBrowser()
-    login(driver)
-    clickProfile(driver)
-    editProfile(driver)
-    closeBrowser(driver)
+# @allure.story("個人資訊可以修改")
+# def test_EditProfile():
+#     driver = openBrowser()
+#     login(driver)
+#     clickProfile(driver)
+#     editProfile(driver)
+#     closeBrowser(driver)
 
 
 # @allure.story("個人資訊手機號碼無法輸入過長")
@@ -97,25 +97,25 @@ def login(driver):
     )
 
 
-@allure.step("點選個人頁面")
-def clickProfile(driver):
-    profileElement = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located(
-            (By.XPATH, '//*[@id="navigation-bar"]/div[2]/div/div[2]/div/div[2]/div/div'))
-    )
-    profileElement.click()
+# @allure.step("點選個人頁面")
+# def clickProfile(driver):
+#     profileElement = WebDriverWait(driver, 10).until(
+#         EC.presence_of_element_located(
+#             (By.XPATH, '//*[@id="navigation-bar"]/div[2]/div/div[2]/div/div[2]/div/div'))
+#     )
+#     profileElement.click()
 
 
-@ allure.step("編輯個人頁面")
-def editProfile(driver):
-    WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located(
-            (By.XPATH, '//*[@id="customer-info"]/h2'))
-    )
-    WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located(
-            (By.XPATH, '//*[@id="customer-info"]/button'))
-    ).click()
+# @ allure.step("編輯個人頁面")
+# def editProfile(driver):
+#     WebDriverWait(driver, 10).until(
+#         EC.presence_of_element_located(
+#             (By.XPATH, '//*[@id="customer-info"]/h2'))
+#     )
+#     WebDriverWait(driver, 10).until(
+#         EC.presence_of_element_located(
+#             (By.XPATH, '//*[@id="customer-info"]/button'))
+#     ).click()
 
 
 # @ allure.step("電話號碼不可過長")
