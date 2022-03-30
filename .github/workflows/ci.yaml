@@ -10,6 +10,7 @@ jobs:
         ports:
           - 4444:4444
       shm_size: "1gb"
+      restart: unless-stopped
 
     steps:
       - name: Check out repository code
