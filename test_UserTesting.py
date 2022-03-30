@@ -65,7 +65,7 @@ def openBrowser():
     driver = webdriver.Remote(
         command_executor="http://localhost:4444/wd/hub",
         # desired_capabilities=DesiredCapabilities.CHROME,
-        options=chrome_options
+        # options=chrome_options
     )
     driver.get("https://rhinoshield.tw/")
     return driver
