@@ -9,6 +9,8 @@ jobs:
         image: selenium/standalone-chrome:97.0
         ports:
           - 4444:4444
+        env:
+          LANGUAGE: "zh_TW:zh"
 
     steps:
       - name: Check out repository code
