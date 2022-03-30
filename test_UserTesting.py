@@ -14,13 +14,13 @@ def test_login():
     closeBrowser(driver)
 
 
-# @allure.story("個人資訊可以修改")
-# def test_EditProfile():
-#     driver = openBrowser()
-#     login(driver)
-#     clickProfile(driver)
-#     editProfile(driver)
-#     closeBrowser(driver)
+@allure.story("個人資訊可以修改")
+def test_EditProfile():
+    driver = openBrowser()
+    login(driver)
+    clickProfile(driver)
+    editProfile(driver)
+    closeBrowser(driver)
 
 
 # @allure.story("個人資訊手機號碼無法輸入過長")
