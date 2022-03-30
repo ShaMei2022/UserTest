@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import allure
 
 
-@allure.story('登入測試')
+@allure.story("登入測試")
 def test_login():
     driver = openBrowser()
     login(driver)
