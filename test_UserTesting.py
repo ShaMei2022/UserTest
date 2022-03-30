@@ -64,7 +64,7 @@ def openBrowser():
     # chrome_options.add_argument("no-sandbox")
     driver = webdriver.Remote(
         command_executor="http://localhost:4444/wd/hub",
-        desired_capabilities=DesiredCapabilities.CHROME,
+        # desired_capabilities=DesiredCapabilities.CHROME,
         options=chrome_options
     )
     driver.get("https://rhinoshield.tw/")
