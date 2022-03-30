@@ -9,8 +9,7 @@ jobs:
         image: selenium/standalone-chrome
         ports:
           - 4444:4444
-      shm_size: '1 gb'
-      restart: unless-stopped
+      
 
     steps:
       - name: Check out repository code
