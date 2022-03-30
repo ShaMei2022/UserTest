@@ -2,6 +2,7 @@ from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.support import expected_conditions as EC
 import allure
 
@@ -13,13 +14,13 @@ def test_login():
     closeBrowser(driver)
 
 
-@allure.story("個人資訊可以修改")
-def test_EditProfile():
-    driver = openBrowser()
-    login(driver)
-    clickProfile(driver)
-    editProfile(driver)
-    closeBrowser(driver)
+# @allure.story("個人資訊可以修改")
+# def test_EditProfile():
+#     driver = openBrowser()
+#     login(driver)
+#     clickProfile(driver)
+#     editProfile(driver)
+#     closeBrowser(driver)
 
 
 # @allure.story("個人資訊手機號碼無法輸入過長")
@@ -57,8 +58,13 @@ def openBrowser():
     chrome_options.add_argument("headless")
     chrome_options.add_argument("--ignore-certificate-errors")
     chrome_options.add_argument("--ignore-ssl-errors")
+    chrome_options.add_argument("disable-gpu")
+    chrome_options.add_argument("no-default-browser-check")
+    chrome_options.add_argument("no-first-run")
+    chrome_options.add_argument("no-sandbox")
     driver = webdriver.Remote(
         command_executor="http://localhost:4444/wd/hub",
+        desired_capabilities=DesiredCapabilities.CHROME,
         options=chrome_options
     )
     driver.get("https://rhinoshield.tw/")
