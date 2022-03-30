@@ -24,9 +24,11 @@ jobs:
       - name: Install pipenv
         run: |
           python -m pip install --upgrade pipenv wheel
+
       - name: Install pitest
         run: |
           pipenv install pytest
+          
       - id: cache-pipenv
         uses: actions/cache@v1
         with:
