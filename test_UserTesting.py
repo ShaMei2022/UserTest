@@ -15,42 +15,42 @@ def test_login():
     closeBrowser(driver)
 
 
-# @allure.story("個人資訊可以修改")
-# def test_EditProfile():
-#     driver = openBrowser()
-#     login(driver)
-#     clickProfile(driver)
-#     editProfile(driver)
-#     closeBrowser(driver)
+@allure.story("個人資訊可以修改")
+def test_EditProfile():
+    driver = openBrowser()
+    login(driver)
+    clickProfile(driver)
+    editProfile(driver)
+    closeBrowser(driver)
 
 
-# @allure.story("個人資訊手機號碼無法輸入過長")
-# def test_NumberCantLong():
-#     driver = openBrowser()
-#     login(driver)
-#     clickProfile(driver)
-#     editProfile(driver)
-#     numberCantLong(driver)
-#     closeBrowser(driver)
+@allure.story("個人資訊手機號碼無法輸入過長")
+def test_NumberCantLong():
+    driver = openBrowser()
+    login(driver)
+    clickProfile(driver)
+    editProfile(driver)
+    numberCantLong(driver)
+    closeBrowser(driver)
 
 
-# @allure.story("個人資訊手機號碼無法輸入非數字字元")
-# def test_NotNumber():
-#     driver = openBrowser()
-#     login(driver)
-#     clickProfile(driver)
-#     editProfile(driver)
-#     notNumber(driver)
-#     closeBrowser(driver)
+@allure.story("個人資訊手機號碼無法輸入非數字字元")
+def test_NotNumber():
+    driver = openBrowser()
+    login(driver)
+    clickProfile(driver)
+    editProfile(driver)
+    notNumber(driver)
+    closeBrowser(driver)
 
 
-# @allure.story("密碼修改必須超過5個字元")
-# def test_NewPassword():
-#     driver = openBrowser()
-#     login(driver)
-#     clickProfile(driver)
-#     newPassword(driver)
-#     closeBrowser(driver)
+@allure.story("密碼修改必須超過5個字元")
+def test_NewPassword():
+    driver = openBrowser()
+    login(driver)
+    clickProfile(driver)
+    newPassword(driver)
+    closeBrowser(driver)
 
 
 @allure.step("openBrowser")
